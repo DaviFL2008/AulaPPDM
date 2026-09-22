@@ -1,99 +1,135 @@
 import 'package:flutter/material.dart';
 
-void main() {
-  runApp(const MeuCrachaApp());
-}
+class CartaoEstudante extends StatelessWidget {
+  final String nome;
+  final String curso;
+  final String ra;
+  final String email;
+  final String imagemUrl;
 
-class MeuCrachaApp extends StatelessWidget {
-  const MeuCrachaApp({super.key});
-
-  @override
-  Widget build(BuildContext context) {
-    return MaterialApp(
-      debugShowCheckedModeBanner: false,
-      title: 'PPDM - Cracha Digital',
-      theme: ThemeData(
-        colorScheme: ColorScheme.fromSeed(seedColor: Colors.indigo),
-        useMaterial3: true,
-      ),
-      home: const TelaCracha(),
-    );
-  }
-}
-
-class TelaCracha extends StatelessWidget {
-  const TelaCracha({super.key});
+  const CartaoEstudante({
+    super.key,
+    required this.nome,
+    required this.curso,
+    required this.ra,
+    required this.email,
+    required this.imagemUrl,
+  });
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: const Text('PPDM - Identificacao Estudantil'),
-        centerTitle: true,
-        backgroundColor: Colors.indigo,
-        foregroundColor: Colors.white,
-      ),
-      body: Center(
-        child: Container(
-          width: 320,
-          padding: const EdgeInsets.all(20.0),
-          decoration: BoxDecoration(
-            color: Colors.indigo.shade50,
-            borderRadius: BorderRadius.circular(16.0),
-            border: Border.all(color: Colors.indigo, width: 2.0),
-            boxShadow: const [
-              BoxShadow(
-                color: Colors.black12,
-                blurRadius: 10,
-                offset: Offset(0, 4),
-              ),
-            ],
+    return Container(
+      width: 320,
+      padding: const EdgeInsets.all(20.0),
+
+      // EXERCÍCIO 4: Fundo gradiente
+      decoration: BoxDecoration(
+        borderRadius: BorderRadius.circular(16.0),
+        border: Border.all(
+          color: Colors.green,
+          width: 2.0,
+        ),
+        boxShadow: const [
+          BoxShadow(
+            color: Colors.black12,
+            blurRadius: 10,
+            offset: Offset(0, 4),
           ),
-          child: Column(
-            mainAxisSize: MainAxisSize.min,
-            children: [
-              const CircleAvatar(
-                radius: 40,
-                backgroundColor: Colors.indigo,
-                child: Icon(Icons.person, size: 50, color: Colors.white),
-              ),
-              const SizedBox(height: 12.0),
-              const Text(
-                'Ana Silva Santos',
-                style: TextStyle(
-                  fontSize: 22.0,
-                  fontWeight: FontWeight.bold,
-                  color: Colors.indigo,
-                ),
-              ),
-              const Text(
-                'Desenvolvimento Mobile / PPDM',
-                style: TextStyle(
-                  fontSize: 14.0,
-                  color: Colors.grey,
-                  fontWeight: FontWeight.w500,
-                ),
-              ),
-              const Divider(height: 24, thickness: 1),
-              Row(
-                children: const [
-                  Icon(Icons.badge, color: Colors.indigo),
-                  SizedBox(width: 10),
-                  Text('RA: 2026109923', style: TextStyle(fontSize: 16)),
-                ],
-              ),
-              const SizedBox(height: 8.0),
-              Row(
-                children: const [
-                  Icon(Icons.email, color: Colors.indigo),
-                  SizedBox(width: 10),
-                  Text('ana.silva@estudante.edu.br', style: TextStyle(fontSize: 14)),
-                ],
-              ),
-            ],
-          ),
+        ],
+        gradient: LinearGradient(
+          colors: [
+            Colors.green.shade50,
+            Colors.white,
+          ],
+          begin: Alignment.topLeft,
+          end: Alignment.bottomRight,
         ),
       ),
-    );
-  }
-}
+
+      child: Padding(
+        padding: const EdgeInsets.all(8.0),
+        child: Column(
+          mainAxisSize: MainAxisSize.min,
+          children: [
+
+            // EXERCÍCIO 1: Imagem real usando NetworkImage
+            CircleAvatar(
+              radius: 50,
+              backgroundImage: NetworkImage(imagemUrl),
+            ),
+
+            const SizedBox(height: 12.0),
+
+            Text(
+              nome,
+              style: const TextStyle(
+                fontSize: 22.0,
+                fontWeight: FontWeight.bold,
+                color: Colors.green,
+              ),
+            ),
+
+            Text(
+              curso,
+              style: const TextStyle(
+                fontSize: 14.0,
+                color: Colors.grey,
+                fontWeight: FontWeight.w500,
+              ),
+            ),
+
+            const Divider(
+              height: 24,
+              thickness: 1,
+            ),
+
+            Row(
+              children: [
+                const Icon(
+                  Icons.badge,
+                  color: Colors.green,
+                ),
+                const SizedBox(width: 10),
+                Text(
+                  'RA: $ra',
+                  style: const TextStyle(
+                    fontSize: 16,
+                  ),
+                ),
+              ],
+            ),
+
+            const SizedBox(height: 8.0),
+
+            Row(
+              children: [
+                const Icon(
+                  Icons.email,
+                  color: Colors.green,
+                ),
+                const SizedBox(width: 10),
+                Expanded(
+                  child: Text(
+                    email,
+                    style: const TextStyle(
+                      fontSize: 14,
+                    ),
+                  ),
+                ),
+              ],
+            ),
+
+            const SizedBox(height: 8.0),
+
+            const Row(
+              children: [
+                Icon(
+                  Icons.check_circle,
+                  color: Colors.green,
+                ),
+                SizedBox(width: 10),
+                Text(
+
+
+
+
